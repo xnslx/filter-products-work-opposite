@@ -76,6 +76,8 @@ const Sort = ({ collection }) => {
     category: [],
   });
 
+  const [haveValue, setHaveValue] = useState(false)
+
   const newFilters = { ...filters };
 
   let list2 = [];
@@ -103,6 +105,7 @@ const Sort = ({ collection }) => {
           const targetIndex = value.findIndex((v) => v === e.target.value);
           value.splice(targetIndex, 1);
           newFilters[e.target.name] = value;
+
         }
         setFilters(newFilters);
         console.log(value);
@@ -131,13 +134,22 @@ const Sort = ({ collection }) => {
         {products.length} {products.length > 1 ? "products" : "product"}
       </p>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 ml-60">
-        {product
+        {activeFilters.length  && product
           .filter((pd) => {
-            return Object.entries(pd).find(
-              ([key, value]) => activeFilters.indexOf(pd[key]?.value) > -1
+            return Object.entries(pd).find(([key, value]) =>
+              activeFilters.includes(pd[key]?.value)
             );
           })
           .map((product) => (
+            <li key={product.id}>
+              <ProductCard
+                product={product}
+                titleProduct={titleProduct}
+                priceProduct={priceProduct}
+              />
+            </li>
+          ))}
+          {activeFilters.length === 0 && product.map((product) => (
             <li key={product.id}>
               <ProductCard
                 product={product}
