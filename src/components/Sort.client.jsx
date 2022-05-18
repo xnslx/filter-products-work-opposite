@@ -76,7 +76,7 @@ const Sort = ({ collection }) => {
     category: [],
   });
 
-  const [haveValue, setHaveValue] = useState(false)
+  const [haveValue, setHaveValue] = useState(false);
 
   const newFilters = { ...filters };
 
@@ -105,7 +105,6 @@ const Sort = ({ collection }) => {
           const targetIndex = value.findIndex((v) => v === e.target.value);
           value.splice(targetIndex, 1);
           newFilters[e.target.name] = value;
-
         }
         setFilters(newFilters);
         console.log(value);
@@ -114,52 +113,62 @@ const Sort = ({ collection }) => {
   };
 
   return (
-    <>
-      <Dropdown
-        selectedOption={value}
-        options={options}
-        value={value}
-        onChange={handleChange}
-      />
-      <Filter
-        filterOptions={filterOptions}
-        filters={filters}
-        setFilters={setFilters}
-        onClick={clickFilterHandler}
-      />
-      <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6">
-        {collection.title}
-      </h1>
-      <p className="text-sm text-gray-500 mt-5 mb-5">
-        {products.length} {products.length > 1 ? "products" : "product"}
-      </p>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 ml-60">
-        {activeFilters.length  && product
-          .filter((pd) => {
-            return Object.entries(pd).find(([key, value]) =>
-              activeFilters.includes(pd[key]?.value)
-            );
-          })
-          .map((product) => (
-            <li key={product.id}>
-              <ProductCard
-                product={product}
-                titleProduct={titleProduct}
-                priceProduct={priceProduct}
-              />
-            </li>
-          ))}
-          {activeFilters.length === 0 && product.map((product) => (
-            <li key={product.id}>
-              <ProductCard
-                product={product}
-                titleProduct={titleProduct}
-                priceProduct={priceProduct}
-              />
-            </li>
-          ))}
-      </ul>
-    </>
+    <div className="flex flew-row">
+      <div className="flex flex-col p-12">
+        <div>
+          <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6">
+            {collection.title}
+          </h1>
+          <p className="text-sm text-gray-500 mt-5 mb-5">
+            {products.length} {products.length > 1 ? "products" : "product"}
+          </p>
+        </div>
+        <div className="mt-12">
+          <Dropdown
+            selectedOption={value}
+            options={options}
+            value={value}
+            onChange={handleChange}
+          />
+          <Filter
+            filterOptions={filterOptions}
+            filters={filters}
+            setFilters={setFilters}
+            onClick={clickFilterHandler}
+          />
+        </div>
+      </div>
+      <div>
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-12">
+          {activeFilters.length > 0 &&
+            product
+              .filter((pd) => {
+                return Object.entries(pd).find(([key, value]) =>
+                  activeFilters.includes(pd[key]?.value)
+                );
+              })
+              .map((product) => (
+                <li key={product.id}>
+                  <ProductCard
+                    product={product}
+                    titleProduct={titleProduct}
+                    priceProduct={priceProduct}
+                  />
+                </li>
+              ))}
+          {activeFilters.length === 0 &&
+            product.map((product) => (
+              <li key={product.id}>
+                <ProductCard
+                  product={product}
+                  titleProduct={titleProduct}
+                  priceProduct={priceProduct}
+                />
+              </li>
+            ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 
@@ -171,26 +180,19 @@ export const Dropdown = ({
   selectedOption,
 }) => {
   return (
-    <label>
-      {label}
-      <select onChange={onChange}>
-        {options.map((option) => (
-          <option key={option.id} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </label>
+    <div>
+      <label>
+        {label}
+        <select onChange={onChange}>
+          {options.map((option) => (
+            <option key={option.id} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
   );
 };
-
-// const Filters = ({ filterOptions, filters, setFilters }) => {
-//   console.log("filters", filters);
-//   const clickFilterHandler = (e) => {
-//     console.log(e.target.value);
-//     console.log(e.target.name);
-//   };
-//   return <Filter filterOptions={filterOptions} onChange={clickFilterHandler} />;
-// };
 
 export default Sort;
