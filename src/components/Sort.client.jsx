@@ -122,7 +122,7 @@ const Sort = ({ collection }) => {
           {products.length} {products.length > 1 ? "products" : "product"}
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
         <div className="col-span-1">
           <div className="mt-12">
             <Dropdown
