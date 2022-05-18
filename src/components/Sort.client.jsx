@@ -113,60 +113,64 @@ const Sort = ({ collection }) => {
   };
 
   return (
-    <div className="flex flew-row">
-      <div className="flex flex-col p-12">
-        <div>
-          <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6">
-            {collection.title}
-          </h1>
-          <p className="text-sm text-gray-500 mt-5 mb-5">
-            {products.length} {products.length > 1 ? "products" : "product"}
-          </p>
-        </div>
-        <div className="mt-12">
-          <Dropdown
-            selectedOption={value}
-            options={options}
-            value={value}
-            onChange={handleChange}
-          />
-          <Filter
-            filterOptions={filterOptions}
-            filters={filters}
-            setFilters={setFilters}
-            onClick={clickFilterHandler}
-          />
-        </div>
-      </div>
+    <div>
       <div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-12">
-          {activeFilters.length > 0 &&
-            product
-              .filter((pd) => {
-                return Object.entries(pd).find(([key, value]) =>
-                  activeFilters.includes(pd[key]?.value)
-                );
-              })
-              .map((product) => (
-                <li key={product.id}>
-                  <ProductCard
-                    product={product}
-                    titleProduct={titleProduct}
-                    priceProduct={priceProduct}
-                  />
-                </li>
-              ))}
-          {activeFilters.length === 0 &&
-            product.map((product) => (
-              <li key={product.id}>
-                <ProductCard
-                  product={product}
-                  titleProduct={titleProduct}
-                  priceProduct={priceProduct}
-                />
-              </li>
-            ))}
-        </ul>
+        <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6 text-center">
+          {collection.title}
+        </h1>
+        <p className="text-sm text-gray-500 mt-5 mb-5 text-center">
+          {products.length} {products.length > 1 ? "products" : "product"}
+        </p>
+      </div>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4">
+        <div className="col-span-1">
+          <div className="mt-12">
+            <Dropdown
+              selectedOption={value}
+              options={options}
+              value={value}
+              onChange={handleChange}
+            />
+            <Filter
+              filterOptions={filterOptions}
+              filters={filters}
+              setFilters={setFilters}
+              onClick={clickFilterHandler}
+            />
+          </div>
+        </div>
+        <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-3 2xl:col-span-3">
+          <div>
+            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-12">
+              {activeFilters.length > 0 &&
+                product
+                  .filter((pd) => {
+                    return Object.entries(pd).find(([key, value]) =>
+                      activeFilters.includes(pd[key]?.value)
+                    );
+                  })
+                  .map((product) => (
+                    <li key={product.id}>
+                      <ProductCard
+                        product={product}
+                        titleProduct={titleProduct}
+                        priceProduct={priceProduct}
+                      />
+                    </li>
+                  ))}
+              {activeFilters.length === 0 &&
+                product.map((product) => (
+                  <li key={product.id}>
+                    <ProductCard
+                      product={product}
+                      titleProduct={titleProduct}
+                      priceProduct={priceProduct}
+                    />
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

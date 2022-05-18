@@ -5,7 +5,7 @@ import { useParsedMetafields, Metafield } from "@shopify/hydrogen";
 
 const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
   return (
-    <div className="w-full mt-12">
+    <div className="mt-12">
       {filterOptions.map((t) => (
         <Disclosure>
           {({ open }) => (
