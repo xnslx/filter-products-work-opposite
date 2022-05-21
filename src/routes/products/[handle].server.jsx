@@ -19,7 +19,6 @@ export default function Product({ country = { isoCode: "US" } }) {
       language: languageCode,
       handle,
     },
-    cache: CacheHours(),
     // Preloads queries for a specific URL
     preload: true,
   });
@@ -27,7 +26,6 @@ export default function Product({ country = { isoCode: "US" } }) {
   if (!product) {
     return <NotFound />;
   }
-
 
   return (
     <Layout>

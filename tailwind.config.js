@@ -1,5 +1,18 @@
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
+  plugins: [
+    plugin(function ({ addVariant, e }) {
+      addVariant("threes", ({ modifySelectors, separator }) => {
+        console.log("modifySelectors", modifySelectors);
+        console.log("separator", separator);
+        modifySelectors(({ className }) => {
+          return `.${e(`threes${separator}${className}`)}:nth-child(3n)`;
+        });
+      });
+    }),
+  ],
   theme: {
     extend: {
       typography: (theme) => ({

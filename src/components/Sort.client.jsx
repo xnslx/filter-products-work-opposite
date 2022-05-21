@@ -118,11 +118,8 @@ const Sort = ({ collection }) => {
         <h1 className="font-bold text-4xl md:text-5xl text-gray-900 mb-6 mt-6 text-center">
           {collection.title}
         </h1>
-        <p className="text-sm text-gray-500 mt-5 mb-5 text-center">
-          {products.length} {products.length > 1 ? "products" : "product"}
-        </p>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5">
         <div className="col-span-1">
           <div className="mt-12">
             <Dropdown
@@ -139,9 +136,12 @@ const Sort = ({ collection }) => {
             />
           </div>
         </div>
-        <div className="col-span-1 md:col-span-2 lg:col-span-3 xl:col-span-3 2xl:col-span-3">
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-4 2xl:col-span-4">
           <div>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-12">
+            <p className="text-sm text-gray-500 mt-5 mb-5 text-center">
+              {products.length} {products.length > 1 ? "products" : "product"}
+            </p>
+            <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
               {activeFilters.length > 0 &&
                 product
                   .filter((pd) => {
