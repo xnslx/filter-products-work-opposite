@@ -142,7 +142,7 @@ export default function ProductDetails({product}) {
             <div className="hidden md:block">
               <ProductTitle
                 as="h1"
-                className="text-5xl font-bold text-black mb-4"
+                className="text-lg uppercase font-bold text-black mb-4"
               />
               {product.vendor && (
                 <div className="text-sm font-medium mb-2 text-gray-900">
