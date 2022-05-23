@@ -46,6 +46,7 @@
     "compression": "^1.7.4",
     "embla-carousel-react": "^6.2.0",
     "embla-carousel-wheel-gestures": "^2.2.0",
+    "framer-motion": "^6.3.3",
     "graphql-tag": "^2.12.4",
     "react": "0.0.0-experimental-2bf7c02f0-20220314",
     "react-dom": "0.0.0-experimental-2bf7c02f0-20220314",
