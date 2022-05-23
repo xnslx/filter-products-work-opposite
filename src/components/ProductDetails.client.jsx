@@ -10,7 +10,7 @@ import {
   AddToCartButton,
   BuyNowButton,
 } from "@shopify/hydrogen/client";
-import { motion } from "framer-motion";
+import { motion} from "framer-motion";
 import ProductOptions from "./ProductOptions.client";
 import Gallery from "./Gallery.client";
 import {
@@ -117,18 +117,22 @@ export default function ProductDetails({ product }) {
     setTop(500);
   };
 
+  
+
   return (
     <>
       <ProductProvider data={product} initialVariantId={initialVariant.id}>
-        <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-x-8">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-x-8 ">
           <Gallery />
           <motion.div
-            className="mt-5 mb-8 bg-gray-50 border-t border-gray-400"
+            className="mt-5 mb-8 bg-gray-50"
             drag="y"
             dragConstraints={{ top: -500, bottom: 0 }}
             dragElastic={0.2}
             dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+            onDragEnd={(event, info) => console.log(info.point.x, info.point.y)}
           >
+            <div className="bg-gray-600 h-0.5 w-12 ml-auto mr-auto flex md:hidden lg:hidden xl:hidden"></div>
             <ProductTitle
               as="h1"
               className="text-lg uppercase font-bold text-black mb-4 mt-8"
