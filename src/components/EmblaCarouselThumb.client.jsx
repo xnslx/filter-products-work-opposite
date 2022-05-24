@@ -1,7 +1,6 @@
 import React from "react";
 
 export const Thumb = ({ selected, onClick, imgSrc }) => {
-  console.log('imgSrc',imgSrc)
   return (
     <div
       className={`embla__slide embla__slide--thumb ${

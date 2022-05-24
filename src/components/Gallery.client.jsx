@@ -142,8 +142,6 @@ export default function Gallery() {
     return !med.image.url.includes(featuredMediaSrc);
   });
 
-  console.log("galleryMedia", galleryMedia);
-
   const M = galleryMedia?.map((i) => i.image);
   const mediaByIndex = (index) => M[index % M.length];
   const SLIDE_COUNT = M.length;

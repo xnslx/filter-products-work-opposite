@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   flattenConnection,
   useProduct,
@@ -10,7 +10,7 @@ import {
   AddToCartButton,
   BuyNowButton,
 } from "@shopify/hydrogen/client";
-import { motion} from "framer-motion";
+import { motion, useMotionValue, useDragControls,useTransform } from "framer-motion";
 import ProductOptions from "./ProductOptions.client";
 import Gallery from "./Gallery.client";
 import {
@@ -110,27 +110,55 @@ export default function ProductDetails({ product }) {
       metafield.key === "lifetime_warranty"
   );
 
-  const [top, setTop] = useState(0);
+  const [bottom, setBottom] = useState(0);
+  const [constraint, setConstraint] = useState(0);
+  console.log('botttom', bottom)
+  console.log('constraint',constraint)
+  const [t, setT] = useState(0);
 
   const touchStartEventHandler = (e) => {
     console.log(e);
     setTop(500);
   };
 
+  const dragOriginY = useMotionValue(0);
+  console.log("dragOriginY", dragOriginY);
+
+  const dragControls = useDragControls();
+  console.log("dragControls", dragControls);
+
+  const [isDragging, setDragging] = useState(false);
+  const ref = useRef(null);
+
+  // useEffect(() => {
+  //   console.log('ref.current', ref?.current.value)
+  // },[])
   
 
+  const dragEndHandler = (e, info) => {
+    console.log("info", info);
+    console.log("e", e);
+    console.log(ref)
+    setConstraint(ref?.current?.offsetHeight);
+  };
   return (
     <>
       <ProductProvider data={product} initialVariantId={initialVariant.id}>
-        <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-x-8 ">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr,1fr] gap-x-8">
           <Gallery />
           <motion.div
+            ref={ref}
             className="mt-5 mb-8 bg-gray-50"
             drag="y"
             dragConstraints={{ top: -500, bottom: 0 }}
+            // style={{ marginBottom: -constraint}}
             dragElastic={0.2}
             dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
-            onDragEnd={(event, info) => console.log(info.point.x, info.point.y)}
+            // onDragEnd={() => console.log(ref)}
+            // onDragEnd={() => console.log(ref)}
+            onDragEnd={dragEndHandler}
+            dragControls={dragControls}
+            onPanEnd={(e, pointInfo) => {console.log(e, pointInfo)}} 
           >
             <div className="bg-gray-600 h-0.5 w-12 ml-auto mr-auto flex md:hidden lg:hidden xl:hidden"></div>
             <ProductTitle
