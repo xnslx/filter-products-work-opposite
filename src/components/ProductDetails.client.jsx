@@ -143,11 +143,9 @@ export default function ProductDetails({ product }) {
     console.log("e", e);
     console.log("info", info);
     console.log('ref.current', ref)
-    if (info.delta.y <0) {
+    if (info.velocity.y <0) {
       setConstraint(info.offset.y );
-    } else if(info.delta.y === 0){
-      setConstraint(info.offset.y);
-    } else{
+    }else{
       setConstraint(0);
     }
   };
