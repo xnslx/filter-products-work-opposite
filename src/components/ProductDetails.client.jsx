@@ -117,17 +117,13 @@ export default function ProductDetails({ product }) {
 
   const [bottom, setBottom] = useState(0);
   const [constraint, setConstraint] = useState(0);
-  console.log("botttom", bottom);
-  console.log("constraint", constraint);
   const [t, setT] = useState(0);
 
   const touchStartEventHandler = (e) => {
-    console.log(e);
     setTop(500);
   };
 
   const dragOriginY = useMotionValue(0);
-  console.log("dragOriginY", dragOriginY);
 
   const [isDragging, setDragging] = useState(false);
   const ref = useRef(null);
@@ -140,9 +136,6 @@ export default function ProductDetails({ product }) {
   console.log("dragControls", dragControls);
 
   const dragEndHandler = (e, info) => {
-    console.log("e", e);
-    console.log("info", info);
-    console.log('ref.current', ref)
     if (info.velocity.y <0) {
       setConstraint(info.offset.y );
     }else{
