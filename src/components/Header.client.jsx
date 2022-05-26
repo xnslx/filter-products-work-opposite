@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@shopify/hydrogen/client";
+import { motion, useViewportScroll, useAnimation } from "framer-motion";
 
 import CartToggle from "./CartToggle.client";
 import { useCartUI } from "./CartUIProvider.client";
@@ -7,6 +8,7 @@ import CountrySelector from "./CountrySelector.client";
 import Navigation from "./Navigation.client";
 import MobileNavigation from "./MobileNavigation.client";
 import Search from "./Search.client";
+// import HeaderAnimation from "./HeaderAnimation.client";
 
 /**
  * A client component that specifies the content of the header on the website
@@ -23,20 +25,36 @@ export default function Header({ collections, storeName }) {
     setScrollbarWidth(scrollbarWidth);
   }, [isCartOpen]);
 
+  /* Hook for scroll y */
+  const { scrollYProgress } = useViewportScroll();
+  console.log("scrollYProgress", scrollYProgress);
+  /* State for progress */
+  const [yProgress, setYProgress] = useState(false);
+
+  /* trigger when scroll is updated */
+  useEffect(() => {
+    return scrollYProgress.onChange((p) => setYProgress(p));
+  }, [scrollYProgress]);
+
   return (
     <header className="h-20 lg:h-32" role="banner">
       <div
-        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
+        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto ${
           isMobileNavOpen ? "" : "bg-opacity-95"
         }`}
       >
+        <motion.div
+          className="fixed top-0 left-0 w-screen h-20  origin-top-left bg-yellow-400"
+          animate={{ scaleX: yProgress }}
+          transition={{ duration: 0.2 }}
+        />
         <div
           className="h-full flex lg:flex-col place-content-between"
           style={{
             paddingRight: isCartOpen ? scrollbarWidth : 0,
           }}
         >
-          <div className="text-center w-full flex justify-between items-center">
+          <div className="relative text-center w-full flex justify-between items-center">
             <CountrySelector />
             <MobileNavigation
               collections={collections}
