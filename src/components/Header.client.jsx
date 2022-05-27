@@ -37,14 +37,14 @@ export default function Header({ collections, storeName }) {
   }, [scrollYProgress]);
 
   return (
-    <header className="h-20 lg:h-32" role="banner">
+    <header className="h-24 " role="banner">
       <div
-        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto ${
+        className={`fixed z-20 h-24 w-full border-b border-gray-200 px-6 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto ${
           isMobileNavOpen ? "" : "bg-opacity-95"
         }`}
       >
         <motion.div
-          className="fixed top-0 left-0 w-screen h-20  origin-top-left bg-yellow-400"
+          className="fixed top-0 left-0 w-screen h-24  origin-top-left bg-yellow-400"
           animate={{ scaleX: yProgress }}
           transition={{ duration: 0.2 }}
         />
@@ -55,7 +55,8 @@ export default function Header({ collections, storeName }) {
           }}
         >
           <div className="relative text-center w-full flex justify-between items-center">
-            <CountrySelector />
+            {/* <CountrySelector /> */}
+            <Navigation collections={collections} storeName={storeName} />
             <MobileNavigation
               collections={collections}
               isOpen={isMobileNavOpen}
@@ -67,14 +68,15 @@ export default function Header({ collections, storeName }) {
             >
               {storeName}
             </Link>
-            <Search />
-            <CartToggle
-              handleClick={() => {
-                if (isMobileNavOpen) setIsMobileNavOpen(false);
-              }}
-            />
+            <div className="flex items-center">
+              <Search />
+              <CartToggle
+                handleClick={() => {
+                  if (isMobileNavOpen) setIsMobileNavOpen(false);
+                }}
+              />
+            </div>
           </div>
-          <Navigation collections={collections} storeName={storeName} />
         </div>
       </div>
     </header>

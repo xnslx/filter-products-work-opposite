@@ -236,54 +236,52 @@ const Search = () => {
   });
 
   return (
-    <>
+    <div className="px-4">
       <div>
-        <div>
-          <div
-            className={`z-50 fixed top-0 bottom-0 left-0 right-0 bg-black transition-opacity duration-300 ${
-              modalOpen ? "opacity-20" : "opacity-0 pointer-events-none"
-            }`}
-          />
-          <div
-            ref={domNode}
-            className={clsx([
-              "z-50 pointer-events-none z-50 h-full fixed right-0 top-0 bottom-0 flex flex-col w-full transition-transform duration-500 transform-gpu",
-              modalOpen ? "translate-y-0" : "-translate-y-full",
-            ])}
-          >
-            <div className="overflow-hidden h-1/6 pointer-events-auto bg-white">
-              <form
-                onSubmit={findProduct}
-                action="/search"
-                ref={inputRef}
-                className="mt-8"
-              >
-                <div className="border border-2 w-3/5 ml-auto mr-auto h-1/5 py-1">
-                  <input
-                    className="w-full ml-auto mr-auto h-1/5"
-                    type="text"
-                    value={query}
-                    onChange={handleChange}
-                    name="q"
-                    // onKeyDown={handleKeyDown}
-                    tabIndex="-1"
-                  />
-                </div>
-              </form>
-              <button
-                onClick={() => setModalOpen(false)}
-                className="absolute right-0 top-0 mr-4 pt-4"
-              >
-                X
-              </button>
-            </div>
+        <div
+          className={`z-50 fixed top-0 bottom-0 left-0 right-0 bg-black transition-opacity duration-300 ${
+            modalOpen ? "opacity-20" : "opacity-0 pointer-events-none"
+          }`}
+        />
+        <div
+          ref={domNode}
+          className={clsx([
+            "z-50 pointer-events-none z-50 h-full fixed right-0 top-0 bottom-0 flex flex-col w-full transition-transform duration-500 transform-gpu",
+            modalOpen ? "translate-y-0" : "-translate-y-full",
+          ])}
+        >
+          <div className="overflow-hidden h-1/6 pointer-events-auto bg-white">
+            <form
+              onSubmit={findProduct}
+              action="/search"
+              ref={inputRef}
+              className="mt-8"
+            >
+              <div className="border border-2 w-3/5 ml-auto mr-auto h-1/5 py-1">
+                <input
+                  className="w-full ml-auto mr-auto h-1/5"
+                  type="text"
+                  value={query}
+                  onChange={handleChange}
+                  name="q"
+                  // onKeyDown={handleKeyDown}
+                  tabIndex="-1"
+                />
+              </div>
+            </form>
+            <button
+              onClick={() => setModalOpen(false)}
+              className="absolute right-0 top-0 mr-4 pt-4"
+            >
+              X
+            </button>
           </div>
         </div>
-        <button onClick={clickHandler}>
-          <SearchIcon />
-        </button>
       </div>
-    </>
+      <button onClick={clickHandler} className="">
+        <SearchIcon />
+      </button>
+    </div>
   );
 };
 
