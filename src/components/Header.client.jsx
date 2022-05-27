@@ -63,7 +63,7 @@ export default function Header({ collections, storeName }) {
               setIsOpen={setIsMobileNavOpen}
             />
             <Link
-              className="font-black uppercase text-3xl tracking-widest"
+              className="font-medium uppercase text-xl tracking-widest"
               to="/"
             >
               {storeName}
