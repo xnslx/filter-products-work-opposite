@@ -27,7 +27,6 @@ export default function Header({ collections, storeName }) {
 
   /* Hook for scroll y */
   const { scrollYProgress } = useViewportScroll();
-  console.log("scrollYProgress", scrollYProgress);
   /* State for progress */
   const [yProgress, setYProgress] = useState(false);
 

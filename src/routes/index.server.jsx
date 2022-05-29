@@ -29,6 +29,9 @@ export default function Index({ country = { isoCode: "US" } }) {
         {/* <Suspense fallback={<BoxFallback />}>
           <FeaturedCollectionBox country={country} />
         </Suspense> */}
+        {/* <Suspense fallback={<BoxFallback />}>
+          <FeaturedCollectionGallery  />
+        </Suspense> */}
       </div>
     </Layout>
   );
@@ -190,6 +193,26 @@ function GradientBackground() {
   );
 }
 
+// function FeaturedCollectionGallery({ country }) {
+//   const { languageCode } = useShop();
+
+//   const { data } = useShopQuery({
+//     query: QUERY,
+//     variables: {
+//       country,
+//       language: languageCode,
+//     },
+//     preload: true,
+//   });
+
+//   console.log('featuredcollectiongallery', data.collections.edges)
+
+//   const collections = data ? flattenConnection(data.collections) : [];
+//   return collections.map((collection) => {
+//     return <FeaturedCollection collection={collection} />;
+//   });
+// }
+
 const SEO_QUERY = gql`
   query homeShopInfo {
     shop {
@@ -252,3 +275,5 @@ const QUERY = gql`
     }
   }
 `;
+
+
