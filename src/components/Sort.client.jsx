@@ -4,13 +4,13 @@ import gql from "graphql-tag";
 
 import ProductCard from "./ProductCard";
 import Filter from "./Filter.client";
+import MobileFilter from "./MobileFilter.client";
 
 const Sort = ({ collection }) => {
   console.log("collection", collection);
   const defaultProducts = collection.defaultQuery.edges.map(
     (edge) => edge.node
   ); //default
-  
 
   const products = collection.titleQuery.edges.map((edge) => edge.node);
   const titleProduct = collection.titleQuery.edges.map((edge) => edge.node); //A to Z
@@ -135,6 +135,10 @@ const Sort = ({ collection }) => {
               setFilters={setFilters}
               onClick={clickFilterHandler}
             />
+            <MobileFilter filterOptions={filterOptions}
+              filters={filters}
+              setFilters={setFilters}
+              onClick={clickFilterHandler} />
           </div>
         </div>
         <div className="col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-4 2xl:col-span-4">

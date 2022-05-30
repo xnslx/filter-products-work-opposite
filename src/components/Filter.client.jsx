@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import { useParsedMetafields, Metafield } from "@shopify/hydrogen";
 
 const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
   return (
-    <div className="mt-12">
+    <div className="mt-12 hidden md:block lg:block xl:block">
       {filterOptions.map((t) => (
         <Disclosure>
           {({ open }) => (
