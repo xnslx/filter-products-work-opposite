@@ -196,7 +196,6 @@ const Search = () => {
   };
 
   const findProduct = (e) => {
-    console.log("i am firing");
     e.preventDefault();
     // axios
     //   .post(`/search/suggest?q=${query}`)

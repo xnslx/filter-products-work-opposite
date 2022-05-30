@@ -7,10 +7,10 @@ import Filter from "./Filter.client";
 
 const Sort = ({ collection }) => {
   console.log("collection", collection);
-  
   const defaultProducts = collection.defaultQuery.edges.map(
     (edge) => edge.node
   ); //default
+  
 
   const products = collection.titleQuery.edges.map((edge) => edge.node);
   const titleProduct = collection.titleQuery.edges.map((edge) => edge.node); //A to Z

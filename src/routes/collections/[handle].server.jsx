@@ -3,6 +3,7 @@ import {
   useShopQuery,
   flattenConnection,
   Seo,
+  useUrl,
 } from "@shopify/hydrogen";
 import gql from "graphql-tag";
 
@@ -10,7 +11,7 @@ import LoadMoreProducts from "../../components/LoadMoreProducts.client";
 import Layout from "../../components/Layout.server";
 import ProductCard from "../../components/ProductCard";
 import NotFound from "../../components/NotFound.server";
-import Sort from "../../components/Sort.client";
+import SortCollection from "../../components/Sort.client";
 import FeaturedCollection from "../../components/FeaturedCollection";
 
 export default function Collection({
@@ -22,6 +23,11 @@ export default function Collection({
 
   const { handle } = params;
   console.log("handle", handle);
+
+  // const url = useUrl();
+  // const collectionQuery = url.href.split("/")[4];
+  // console.log("url", url.href.split("/")[4]);
+
   const { data } = useShopQuery({
     query: COLLECTION_QUERY,
     variables: {
@@ -30,13 +36,13 @@ export default function Collection({
     preload: true,
   });
 
-  console.log('data',data)
+  console.log("data", data);
 
   if (data?.collection == null) {
     return <NotFound />;
   }
   // console.log("data", data.collectionInfo.nodes);
-  const collection = data.collection
+  const collection = data.collection;
   const hasNextPage = collection.defaultQuery.pageInfo.hasNextPage;
 
   console.log("handleserver.jsx", collection);
@@ -45,7 +51,7 @@ export default function Collection({
     <Layout>
       {/* the seo object will be expose in API version 2022-04 or later */}
       <Seo type="collection" data={collection} />
-      <Sort collection={collection} />
+      <SortCollection collection={collection} />
       {hasNextPage && (
         <LoadMoreProducts startingCount={collectionProductCount} />
       )}
