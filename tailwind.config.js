@@ -1,4 +1,5 @@
 const plugin = require("tailwindcss/plugin");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
@@ -14,6 +15,9 @@ module.exports = {
     }),
   ],
   theme: {
+    fontFamily: {
+      sans:['Prompt',  ...defaultTheme.fontFamily.sans]
+    },
     extend: {
       typography: (theme) => ({
         DEFAULT: {
