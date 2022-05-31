@@ -23,6 +23,7 @@ export default function MobileNavigation({collections, isOpen, setIsOpen}) {
     }
   }, [isOpen]);
 
+
   return (
     <div className="lg:hidden">
       <OpenFocusTrap>
@@ -58,7 +59,7 @@ export default function MobileNavigation({collections, isOpen, setIsOpen}) {
   );
 }
 
-function CloseIcon() {
+export function CloseIcon() {
   return (
     <svg
       width="18"

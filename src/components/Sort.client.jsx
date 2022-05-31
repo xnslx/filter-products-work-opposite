@@ -40,6 +40,7 @@ const Sort = ({ collection }) => {
 
   const [value, setValue] = useState("price low to high");
   const [product, setProduct] = useState(defaultProducts);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   console.log("product", product);
   // const sortedProducts = [...product]
@@ -122,7 +123,7 @@ const Sort = ({ collection }) => {
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5">
         <div className="col-span-1">
-          <div className="mt-12">
+          <div className="mt-12 flex flex-row lg:block md:block xl:block">
             <Dropdown
               selectedOption={value}
               options={options}
@@ -135,10 +136,14 @@ const Sort = ({ collection }) => {
               setFilters={setFilters}
               onClick={clickFilterHandler}
             />
-            <MobileFilter filterOptions={filterOptions}
+            <MobileFilter
+              filterOptions={filterOptions}
               filters={filters}
               setFilters={setFilters}
-              onClick={clickFilterHandler} />
+              onClick={clickFilterHandler}
+              isOpen={isMobileNavOpen}
+              setIsOpen={setIsMobileNavOpen}
+            />
           </div>
         </div>
         <div className="col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-4 2xl:col-span-4">
