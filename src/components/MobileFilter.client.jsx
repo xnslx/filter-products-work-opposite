@@ -2,6 +2,7 @@ import { Fragment, useEffect } from "react";
 import { FocusTrap } from "@headlessui/react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
+import clsx from 'clsx';
 
 import { CloseIcon } from "./MobileNavigation.client";
 
@@ -43,7 +44,7 @@ const MobileFilter = ({
           {isOpen ? <CloseIcon /> : "Filter"}
         </button>
         {isOpen ? (
-          <div className="fixed -left-0 top-20 w-full h-screen z-10 bg-gray-50 px-4 md:px-12 py-7">
+          <div className="transition-transform duration-500 translate-x-0 fixed -left-0 top-0 w-full h-screen z-50 bg-gray-50 px-4 md:px-12 py-7">
             {filterOptions.map((t) => (
               <Disclosure>
                 {({ open }) => (
