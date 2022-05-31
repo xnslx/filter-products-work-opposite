@@ -32,7 +32,7 @@ const MobileFilter = ({
   }, [isOpen]);
 
   return (
-    <div className="lg:hidden">
+    <div className="lg:hidden absolute right-4">
       <OpenFocusTrap>
         <button
           type="button"
