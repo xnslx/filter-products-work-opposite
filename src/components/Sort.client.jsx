@@ -123,7 +123,7 @@ const Sort = ({ collection }) => {
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-5 2xl:grid-cols-5">
         <div className="col-span-1">
-          <div className="py-3 border border-1 border-black flex flex-row lg:block md:block xl:block">
+          <div className="px-4 flex flex-row lg:block md:block xl:block">
             <Dropdown
               selectedOption={value}
               options={options}
@@ -147,8 +147,8 @@ const Sort = ({ collection }) => {
           </div>
         </div>
         <div className="col-span-1 md:col-span-2 lg:col-span-4 xl:col-span-4 2xl:col-span-4">
-          <div>
-            <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-0 lg:gap-8 xl:gap-8 mb-16">
+          <div className="p-4">
+            <ul className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-8 xl:gap-8 mb-16">
               {activeFilters.length > 0 &&
                 product
                   .filter((pd) => {

@@ -17,7 +17,7 @@ export default function ProductCard({ product, titleProduct, priceProduct }) {
   return (
     <div className="text-md mb-6 relative">
       <Link to={`/products/${product.handle}`}>
-        <div className="border border-0.5 border-black mb-2 relative flex items-center justify-center overflow-hidden object-cover h-72 lg:h-96 xl:h-96">
+        <div className="mb-2 relative flex items-center justify-center overflow-hidden object-cover h-72 lg:h-96 xl:h-96">
           {selectedVariant.image ? (
             <Image
               className="bg-white absolute w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-cover hover:scale-110"

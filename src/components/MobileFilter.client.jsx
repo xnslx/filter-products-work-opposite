@@ -2,7 +2,8 @@ import { Fragment, useEffect } from "react";
 import { FocusTrap } from "@headlessui/react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
-import clsx from 'clsx';
+import clsx from "clsx";
+import { AnimatePresence, motion, useCycle } from "framer-motion";
 
 import { CloseIcon } from "./MobileNavigation.client";
 
@@ -11,6 +12,28 @@ let scrollPosition = 0;
 /**
  * A client component that defines the navigation for a mobile storefront
  */
+
+const itemVariants = {
+  closed: {
+    opacity: 0,
+  },
+  open: { opacity: 1 },
+};
+
+const sideVariants = {
+  closed: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
+  open: {
+    transition: {
+      staggerChildren: 0.2,
+      staggerDirection: 1,
+    },
+  },
+};
 
 const MobileFilter = ({
   isOpen,
@@ -21,6 +44,8 @@ const MobileFilter = ({
   onClick,
 }) => {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
+
+  const [open, cycleOpen] = useCycle(false, true);
 
   useEffect(() => {
     if (isOpen) {
@@ -33,23 +58,33 @@ const MobileFilter = ({
   }, [isOpen]);
 
   return (
-    <div className="lg:hidden absolute right-4">
-      <OpenFocusTrap>
+    <div className="lg:hidden absolute right-5">
+      <AnimatePresence>
         <button
           type="button"
           className="flex justify-center items-center w-7 h-full"
-          onClick={() => setIsOpen((previousIsOpen) => !previousIsOpen)}
+          onClick={cycleOpen}
         >
           <span className="sr-only">{isOpen ? "Close" : "Open"} Menu</span>
-          {isOpen ? <CloseIcon /> : "Filter"}
+          {open ? <CloseIcon /> : "Filter"}
         </button>
-        {isOpen ? (
-          <div className="transition-transform duration-500 translate-x-0 fixed -left-0 top-0 w-full h-screen z-50 bg-gray-50 px-4 md:px-12 py-7">
+        {open ? (
+          <motion.div
+            className="transition-transform duration-500 -translate-x-0 fixed -left-0 top-0 w-full h-screen z-50 bg-gray-50 px-4 md:px-12 py-7"
+            initial={{ width: 0 }}
+            animate={{
+              width: "100vw",
+            }}
+            exit={{
+              width: 0,
+              transition: { delay: 0.7, duration: 0.3 },
+            }}
+          >
             {filterOptions.map((t) => (
-              <Disclosure>
+              <Disclosure defaultOpen>
                 {({ open }) => (
                   <>
-                    <Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium text-left text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+                    <Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium text-left text-black bg-white  hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                       <span>{t.key}</span>
                       <ChevronUpIcon
                         className={`${
@@ -91,15 +126,15 @@ const MobileFilter = ({
             <button
               type="button"
               className="flex justify-center items-center w-7 h-full"
-              onClick={() => setIsOpen((previousIsOpen) => !previousIsOpen)}
+              onClick={cycleOpen}
             >
               <CloseIcon />
             </button>
-          </div>
+          </motion.div>
         ) : (
           ""
         )}
-      </OpenFocusTrap>
+      </AnimatePresence>
     </div>
   );
 };
