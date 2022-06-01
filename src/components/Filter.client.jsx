@@ -5,10 +5,10 @@ import { ChevronUpIcon } from "@heroicons/react/solid";
 const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
   return (
     <div className="mt-12 hidden md:block lg:block xl:block">
-      {filterOptions.map((t) => (
-        <Disclosure>
+      {filterOptions.map((t, index) => (
+        <Disclosure key={index}>
           {({ open }) => (
-            <>
+            <div>
               <Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium text-left text-black bg-white rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <span>{t.key}</span>
                 <ChevronUpIcon
@@ -26,9 +26,9 @@ const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
                 leaveTo="transform scale-95 opacity-0"
               >
                 <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 ">
-                  {t.value.map((j) => {
+                  {t.value.map((j, index) => {
                     return (
-                      <div>
+                      <div key={index}>
                         <input
                           value={j}
                           name={t.key}
@@ -44,7 +44,7 @@ const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
                   })}
                 </Disclosure.Panel>
               </Transition>
-            </>
+            </div>
           )}
         </Disclosure>
       ))}

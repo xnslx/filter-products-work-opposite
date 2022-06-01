@@ -114,6 +114,7 @@ const Sort = ({ collection }) => {
     });
   };
 
+  console.log("117", product);
   return (
     <div>
       <div>
@@ -143,6 +144,7 @@ const Sort = ({ collection }) => {
               onClick={clickFilterHandler}
               isOpen={isMobileNavOpen}
               setIsOpen={setIsMobileNavOpen}
+              product={product}
             />
           </div>
         </div>
@@ -156,8 +158,8 @@ const Sort = ({ collection }) => {
                       activeFilters.includes(pd[key]?.value)
                     );
                   })
-                  .map((product) => (
-                    <li key={product.id}>
+                  .map((product,index) => (
+                    <li key={index}>
                       <ProductCard
                         product={product}
                         titleProduct={titleProduct}
@@ -166,8 +168,8 @@ const Sort = ({ collection }) => {
                     </li>
                   ))}
               {activeFilters.length === 0 &&
-                product.map((product) => (
-                  <li key={product.id}>
+                product.map((product, index) => (
+                  <li key={index}>
                     <ProductCard
                       product={product}
                       titleProduct={titleProduct}
