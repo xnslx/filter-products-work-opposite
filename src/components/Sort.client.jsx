@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { flattenConnection } from "@shopify/hydrogen/client";
 import gql from "graphql-tag";
+import { v4 as uuidv4 } from "uuid";
 
 import ProductCard from "./ProductCard";
 import Filter from "./Filter.client";
@@ -31,15 +32,16 @@ const Sort = ({ collection }) => {
   // sort product options
   const options = [
     { label: "Sort", value: "sort", id: 6 },
-    { label: "price low to high", value: "price low to high", id: "1" },
-    { label: "price high to low", value: "price high to low", id: "2" },
-    { label: "best selling", value: "best selling", id: "3" },
-    { label: "alphabetically A to Z", value: "alphabetically A to Z", id: "4" },
-    { label: "alphabetically Z to A", value: "alphabetically Z to A", id: "5" },
+    { label: "price low to high", value: "price low to high", id: 1 },
+    { label: "price high to low", value: "price high to low", id: 2 },
+    { label: "best selling", value: "best selling", id: 3 },
+    { label: "alphabetically A to Z", value: "alphabetically A to Z", id: 4 },
+    { label: "alphabetically Z to A", value: "alphabetically Z to A", id: 5 },
   ];
 
   const [value, setValue] = useState("price low to high");
   const [product, setProduct] = useState(defaultProducts);
+  const [p, setP] = useState([])
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   console.log("product", product);
@@ -67,9 +69,9 @@ const Sort = ({ collection }) => {
   };
 
   const filterOptions = [
-    { key: "shape", value: ["Panda", "Dog", "Monkey", "Bird"] },
-    { key: "category", value: ["Toy"] },
-    { key: "quality", value: ["Premium"] },
+    { key: "shape", value: ["Panda", "Dog", "Monkey", "Bird"], id: uuidv4() },
+    { key: "category", value: ["Toy"], id: uuidv4() },
+    { key: "quality", value: ["Premium"], id: uuidv4() },
   ];
 
   const [filters, setFilters] = useState({
@@ -101,9 +103,11 @@ const Sort = ({ collection }) => {
       console.log("value", value);
       if (key === e.target.name) {
         if (value.indexOf(e.target.value) < 0) {
+          //not in the list
           value.push(e.target.value);
           newFilters[e.target.name] = value;
         } else {
+          //in the list
           const targetIndex = value.findIndex((v) => v === e.target.value);
           value.splice(targetIndex, 1);
           newFilters[e.target.name] = value;
@@ -114,7 +118,6 @@ const Sort = ({ collection }) => {
     });
   };
 
-  console.log("117", product);
   return (
     <div>
       <div>
@@ -144,7 +147,6 @@ const Sort = ({ collection }) => {
               onClick={clickFilterHandler}
               isOpen={isMobileNavOpen}
               setIsOpen={setIsMobileNavOpen}
-              product={product}
             />
           </div>
         </div>
@@ -158,7 +160,7 @@ const Sort = ({ collection }) => {
                       activeFilters.includes(pd[key]?.value)
                     );
                   })
-                  .map((product,index) => (
+                  .map((product, index) => (
                     <li key={index}>
                       <ProductCard
                         product={product}

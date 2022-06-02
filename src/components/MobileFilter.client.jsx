@@ -13,22 +13,22 @@ let scrollPosition = 0;
  * A client component that defines the navigation for a mobile storefront
  */
 
-const itemVariants = {
-  closed: {
-    opacity: 0,
-    ease: [0.6, 0.01, -0.05, 0.95],
-    transition: {
-      duration: 0.4,
-    },
-  },
-  open: {
-    opacity: 1,
-    ease: [0.6, 0.01, -0.05, 0.95],
-    transition: {
-      duration: 0.4,
-    },
-  },
-};
+// const itemVariants = {
+//   closed: {
+//     opacity: 0,
+//     ease: [0.6, 0.01, -0.05, 0.95],
+//     transition: {
+//       duration: 0.4,
+//     },
+//   },
+//   open: {
+//     opacity: 1,
+//     ease: [0.6, 0.01, -0.05, 0.95],
+//     transition: {
+//       duration: 0.4,
+//     },
+//   },
+// };
 
 const sideVariants = {
   closed: {
@@ -54,7 +54,6 @@ const MobileFilter = ({
   onClick,
 }) => {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
-  
 
   const [open, cycleOpen] = useCycle(false, true);
 
@@ -68,6 +67,7 @@ const MobileFilter = ({
     }
   }, [isOpen]);
 
+
   return (
     <div className="lg:hidden absolute right-5">
       <AnimatePresence>
@@ -76,8 +76,8 @@ const MobileFilter = ({
           className="flex justify-center items-center w-7 h-full"
           onClick={cycleOpen}
         >
-          <span className="sr-only">{isOpen ? "Close" : "Open"} Menu</span>
-          {open ? <CloseIcon /> : "Filter"}
+          {/* <span className="sr-only">{isOpen ? "Close" : "Open"} Menu</span> */}
+          {open ? '': "Filter"}
         </button>
         {open ? (
           <motion.div
@@ -91,8 +91,8 @@ const MobileFilter = ({
               transition: { delay: 0.7, duration: 0.3 },
             }}
           >
-            {filterOptions.map((t,index) => (
-              <Disclosure defaultOpen key={index}>
+            {filterOptions.map((t) => (
+              <Disclosure defaultOpen>
                 {({ open }) => (
                   <>
                     <Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium text-left text-black bg-white  hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
@@ -112,7 +112,7 @@ const MobileFilter = ({
                       leaveTo="transform scale-95 opacity-0"
                     >
                       <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 ">
-                        {t.value.map((j,index) => {
+                        {t.value.map((j, index) => {
                           return (
                             <div key={index}>
                               <input
