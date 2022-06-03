@@ -52,8 +52,15 @@ const MobileFilter = ({
   filters,
   setFilters,
   onClick,
+  value,
+  onChange,
+  checked,
+  activeFilters,
 }) => {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
+
+  console.log('activeFilters', activeFilters)
+  console.log('filters', filters)
 
   const [open, cycleOpen] = useCycle(false, true);
 
@@ -67,7 +74,6 @@ const MobileFilter = ({
     }
   }, [isOpen]);
 
-
   return (
     <div className="lg:hidden absolute right-5">
       <AnimatePresence>
@@ -77,7 +83,7 @@ const MobileFilter = ({
           onClick={cycleOpen}
         >
           {/* <span className="sr-only">{isOpen ? "Close" : "Open"} Menu</span> */}
-          {open ? '': "Filter"}
+          {open ? "" : "Filter"}
         </button>
         {open ? (
           <motion.div
@@ -113,6 +119,7 @@ const MobileFilter = ({
                     >
                       <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 ">
                         {t.value.map((j, index) => {
+                          console.log("j", j);
                           return (
                             <div key={index}>
                               <input
@@ -121,6 +128,8 @@ const MobileFilter = ({
                                 type="checkbox"
                                 className="mr-2"
                                 onClick={onClick}
+                                onChange={onChange}
+                                checked={activeFilters.includes(j)}
                               />
                               <label className="px-2">
                                 <span>{j}</span>

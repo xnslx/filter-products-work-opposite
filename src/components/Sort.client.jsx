@@ -41,8 +41,9 @@ const Sort = ({ collection }) => {
 
   const [value, setValue] = useState("price low to high");
   const [product, setProduct] = useState(defaultProducts);
-  const [p, setP] = useState([])
+  const [p, setP] = useState([]);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   console.log("product", product);
   // const sortedProducts = [...product]
@@ -98,6 +99,7 @@ const Sort = ({ collection }) => {
   let array = [];
 
   const clickFilterHandler = (e) => {
+    console.log(e.target.checked);
     Object.entries(filters).map(([key, value]) => {
       console.log("key", key);
       console.log("value", value);
@@ -117,6 +119,13 @@ const Sort = ({ collection }) => {
       }
     });
   };
+
+  const hChange = (e) => {
+    console.log(e);
+  };
+
+  console.log("checked", checked);
+  console.log("newFilters", newFilters);
 
   return (
     <div>
@@ -139,6 +148,8 @@ const Sort = ({ collection }) => {
               filters={filters}
               setFilters={setFilters}
               onClick={clickFilterHandler}
+              onChange={hChange}
+              activeFilters={activeFilters}
             />
             <MobileFilter
               filterOptions={filterOptions}
@@ -147,6 +158,8 @@ const Sort = ({ collection }) => {
               onClick={clickFilterHandler}
               isOpen={isMobileNavOpen}
               setIsOpen={setIsMobileNavOpen}
+              onChange={hChange}
+              activeFilters={activeFilters}
             />
           </div>
         </div>

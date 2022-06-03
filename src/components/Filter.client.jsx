@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
 
-const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
+const Filter = ({ filterOptions, onClick, filters, setFilters,checked, onChange,value, activeFilters }) => {
   return (
     <div className="mt-12 hidden md:block lg:block xl:block">
       {filterOptions.map((t, index) => (
@@ -35,6 +35,8 @@ const Filter = ({ filterOptions, onClick, filters, setFilters }) => {
                           type="checkbox"
                           className="mr-2"
                           onClick={onClick}
+                          onChange={onChange}
+                                checked={activeFilters.includes(j)}
                         />
                         <label className="px-2">
                           <span>{j}</span>
