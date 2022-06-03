@@ -124,8 +124,18 @@ const Sort = ({ collection }) => {
     console.log(e);
   };
 
-  console.log("checked", checked);
-  console.log("newFilters", newFilters);
+  let productLength;
+  if (activeFilters.length > 0) {
+    productLength = product.filter((pd) => {
+      return Object.entries(pd).find(([key, value]) =>
+        activeFilters.includes(pd[key]?.value)
+      );
+    }).length;
+  } else {
+    productLength = product.length;
+  }
+
+  console.log('productLength',productLength)
 
   return (
     <div>
@@ -160,6 +170,7 @@ const Sort = ({ collection }) => {
               setIsOpen={setIsMobileNavOpen}
               onChange={hChange}
               activeFilters={activeFilters}
+              productLength={productLength}
             />
           </div>
         </div>
