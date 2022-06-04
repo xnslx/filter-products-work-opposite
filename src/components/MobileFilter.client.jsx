@@ -152,7 +152,7 @@ const MobileFilter = ({
                 </Disclosure>
               ))}
             </div>
-            <button onClick={cycleOpen} className="flex ml-auto mr-auto justify-center absolute bg-black text-white py-4 px-12 mb-8 bottom-0">VIEW RESULTS({productLength})</button>
+            <div className="flex ml-auto mr-auto justify-center"><button onClick={cycleOpen} className=" absolute bg-black text-white py-4 px-16 mb-8 bottom-0">VIEW RESULTS({productLength})</button></div>
           </motion.div>
         ) : (
           ""
