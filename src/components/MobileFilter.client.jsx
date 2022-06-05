@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useRef } from "react";
 import { FocusTrap } from "@headlessui/react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
@@ -75,6 +75,18 @@ const MobileFilter = ({
     }
   }, [isOpen]);
 
+  console.log("activeFilters", activeFilters);
+
+  const deleteHandler = (e, i) => {
+    // const targetIndex = activeFilters.findIndex((v) => v === i);
+    // console.log('targetIndex ',targetIndex )
+    // activeFilters.splice(targetIndex, 1);
+    const test = activeFilters.filter(f => f!==i)
+    console.log('test',test)
+  };
+
+  console.log('activeFilters',activeFilters)
+
   return (
     <div className="lg:hidden absolute right-5">
       <AnimatePresence>
@@ -85,6 +97,7 @@ const MobileFilter = ({
         >
           {/* <span className="sr-only">{isOpen ? "Close" : "Open"} Menu</span> */}
           {open ? "" : "Filter"}
+          <span>{activeFilters.length > 0 ? activeFilters.length : ""}</span>
         </button>
         {open ? (
           <motion.div
@@ -105,6 +118,24 @@ const MobileFilter = ({
             >
               <CloseIcon />
             </button>
+            <div className="flex ml-auto mr-auto justify-center">
+              {activeFilters.length > 0
+                ? // <div className="border border-1">
+                  //   <span>{activeFilters.toString()}</span>
+                  //   <button onClick={onClick}><CloseIcon /></button>
+                  // </div>
+                  activeFilters.map((i) => {
+                    return (
+                      <div className="border border-1 py-1 px-2 flex flex-row">
+                        <span>{i}</span>
+                        <button onClick={(e) => deleteHandler(e, i)}>
+                          <CloseIcon />
+                        </button>
+                      </div>
+                    );
+                  })
+                : ""}
+            </div>
             <div className="mt-12">
               {filterOptions.map((t) => (
                 <Disclosure defaultOpen>
@@ -152,7 +183,14 @@ const MobileFilter = ({
                 </Disclosure>
               ))}
             </div>
-            <div className="flex ml-auto mr-auto justify-center"><button onClick={cycleOpen} className=" absolute bg-black text-white py-4 px-16 mb-8 bottom-0">VIEW RESULTS({productLength})</button></div>
+            <div className="flex ml-auto mr-auto justify-center">
+              <button
+                onClick={cycleOpen}
+                className=" absolute bg-black text-white py-4 px-16 mb-8 bottom-0"
+              >
+                VIEW RESULTS({productLength})
+              </button>
+            </div>
           </motion.div>
         ) : (
           ""
