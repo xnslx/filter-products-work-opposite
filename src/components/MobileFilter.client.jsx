@@ -81,8 +81,8 @@ const MobileFilter = ({
     // const targetIndex = activeFilters.findIndex((v) => v === i);
     // console.log('targetIndex ',targetIndex )
     // activeFilters.splice(targetIndex, 1);
-    const test = activeFilters.filter(f => f!==i)
-    console.log('test',test)
+    activeFilters.filter(f => f!==i)
+    console.log('firing', activeFilters)
   };
 
   console.log('activeFilters',activeFilters)
@@ -101,6 +101,7 @@ const MobileFilter = ({
         </button>
         {open ? (
           <motion.div
+            key="modal"
             className="transition-transform duration-500 -translate-x-0 fixed -left-0 top-0 w-full h-screen z-50 bg-gray-50 px-4 md:px-12 py-7"
             initial={{ width: 0 }}
             animate={{
@@ -113,10 +114,10 @@ const MobileFilter = ({
           >
             <button
               type="button"
-              className="flex absolute right-0 mr-4 mb-4 items-center w-7"
+              className="flex absolute right-0 mr-12 mb-4 items-center w-7"
               onClick={cycleOpen}
             >
-              <CloseIcon />
+              CLOSE
             </button>
             <div className="flex ml-auto mr-auto justify-center">
               {activeFilters.length > 0
