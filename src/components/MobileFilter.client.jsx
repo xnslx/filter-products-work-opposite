@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect } from "react";
 import { FocusTrap } from "@headlessui/react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
@@ -75,18 +75,6 @@ const MobileFilter = ({
     }
   }, [isOpen]);
 
-  console.log("activeFilters", activeFilters);
-
-  const deleteHandler = (e, i) => {
-    // const targetIndex = activeFilters.findIndex((v) => v === i);
-    // console.log('targetIndex ',targetIndex )
-    // activeFilters.splice(targetIndex, 1);
-    activeFilters.filter(f => f!==i)
-    console.log('firing', activeFilters)
-  };
-
-  console.log('activeFilters',activeFilters)
-
   return (
     <div className="lg:hidden absolute right-5">
       <AnimatePresence>
@@ -95,7 +83,6 @@ const MobileFilter = ({
           className="flex justify-center items-center w-7 h-full"
           onClick={cycleOpen}
         >
-          {/* <span className="sr-only">{isOpen ? "Close" : "Open"} Menu</span> */}
           {open ? "" : "Filter"}
           <span>{activeFilters.length > 0 ? activeFilters.length : ""}</span>
         </button>
@@ -114,32 +101,14 @@ const MobileFilter = ({
           >
             <button
               type="button"
-              className="flex absolute right-0 mr-12 mb-4 items-center w-7"
+              className="flex absolute right-0 mr-4 mb-4 items-center w-7"
               onClick={cycleOpen}
             >
-              CLOSE
+              <CloseIcon />
             </button>
-            <div className="flex ml-auto mr-auto justify-center">
-              {activeFilters.length > 0
-                ? // <div className="border border-1">
-                  //   <span>{activeFilters.toString()}</span>
-                  //   <button onClick={onClick}><CloseIcon /></button>
-                  // </div>
-                  activeFilters.map((i) => {
-                    return (
-                      <div className="border border-1 py-1 px-2 flex flex-row">
-                        <span>{i}</span>
-                        <button onClick={(e) => deleteHandler(e, i)}>
-                          <CloseIcon />
-                        </button>
-                      </div>
-                    );
-                  })
-                : ""}
-            </div>
             <div className="mt-12">
               {filterOptions.map((t) => (
-                <Disclosure defaultOpen>
+                <Disclosure defaultOpen key={t.id}>
                   {({ open }) => (
                     <>
                       <Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium text-left text-black bg-white  hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
