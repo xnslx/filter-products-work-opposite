@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { FocusTrap } from "@headlessui/react";
 import { Disclosure, Transition } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
@@ -60,10 +60,14 @@ const MobileFilter = ({
 }) => {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
 
-  console.log("activeFilters", activeFilters);
-  console.log("filters", filters);
-
   const [open, cycleOpen] = useCycle(false, true);
+  // const [currentActiveFilters, setCurrentActiveFilters] =
+  //   useState(activeFilters);
+
+  // console.log('activeFilters',activeFilters)
+  // console.log('currentActiveFilters',currentActiveFilters)
+
+  // const [isChecked, setIsChecked] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
@@ -74,6 +78,23 @@ const MobileFilter = ({
       window.scrollTo(0, scrollPosition);
     }
   }, [isOpen]);
+
+  // const changeHandler = (e) => {
+  //   console.log("changehandler", e.target.value);
+  //   if(e?.target.checked){
+  //     setCurrentActiveFilters([...activeFilters, e.target.value])
+  //   }
+  // };
+
+  // const deleteHandler = (e,i) => {
+  //   console.log("deletehandler", e);
+  //   const newData = activeFilters.filter(f => f!== i)
+
+  //   // const newData = currentActiveFilters.filter(f => f!==i)
+  //   setCurrentActiveFilters(newData)
+  // };
+
+  // console.log('isChecked',isChecked)
 
   return (
     <div className="lg:hidden absolute right-5">
@@ -106,6 +127,18 @@ const MobileFilter = ({
             >
               <CloseIcon />
             </button>
+            {/* <div className="flex ml-auto mr-auto justify-center">
+              {currentActiveFilters.map((i) => {
+                return (
+                  <div className="border border-1 py-1 px-2 flex flex-row">
+                    <span>{i}</span>
+                    <button onClick={(e) => deleteHandler(e, i)}>
+                      <CloseIcon />
+                    </button>
+                  </div>
+                );
+              })}
+            </div> */}
             <div className="mt-12">
               {filterOptions.map((t) => (
                 <Disclosure defaultOpen key={t.id}>
